@@ -1,22 +1,29 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  background-color: #20212C;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  align-items: center;
+type ContainerProps = {
+  done: boolean;
+}
 
-  input { 
-    width: 25px;
-    height: 25px;
-    margin-right: 10px;
-  }
+export const Container = styled.div(({ done }: ContainerProps) => (
+  `
+    display: flex;
+    background-color: #20212C;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    align-items: center;
 
-  label{ 
-    color: #928d8d;
-    font-size: 20px;
-  }
+    input { 
+      width: 25px;
+      height: 25px;
+      margin-right: 10px;
+    }
+
+    label{ 
+      color: #928d8d;
+      font-size: 20px;
+      text-decoration: ${done ? 'line-through' : 'initial'};
+    }
 `
+));
 
