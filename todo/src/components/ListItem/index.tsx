@@ -3,15 +3,14 @@ import * as Comp from './style';
 import { Item } from '../../types/Item';
 
 type Props = {
-  item: Item;
+  item: Item,
+  onChange: (id: number, done: boolean) => void
 }
 
-export const ListItem = ({ item }: Props ) => {
-  const[isChecked, setIsChecked] = useState(item.done)
-
+export const ListItem = ({ item, onChange }: Props ) => {
   return(
-    <Comp.Container done={isChecked}>
-      <input type="checkbox" checked={isChecked} onChange={e => setIsChecked(e.target.checked)}/>
+    <Comp.Container done={item.done}>
+      <input type="checkbox" checked={item.done} onChange={e => onChange(item.id, e.target.checked)}/>
       <label>{item.name}</label>
     </Comp.Container>
   );

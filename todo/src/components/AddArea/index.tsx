@@ -1,10 +1,24 @@
+import { useState, KeyboardEvent } from 'react'; 
 import * as Comp from './style';
 
-export const AddArea = () => {
+type Props = {
+  onEnter: (taskName: string) => void;
+}
+
+export const AddArea = ({onEnter}: Props) => {
+  const [inputText, setInputText]  = useState('');
+
+  const handleKeyUp = (e: KeyboardEvent) => {
+    if((e.code === 'Enter' || e.code === 'NumpadEnter') && inputText !== ''){
+      onEnter(inputText);
+      setInputText('');
+    }
+  }
+
   return(
     <Comp.Container>
       <div className="image">➕</div>
-      <input type="text" placeholder="Adicione uma Tarefa"/>
+      <input type="text" placeholder="Adicione uma Tarefa" value={inputText} onChange={e=>setInputText(e.target.value)} onKeyUp={handleKeyUp}/>
     </Comp.Container>  
   );
 }
